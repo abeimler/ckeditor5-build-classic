@@ -8,7 +8,7 @@ import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classicedi
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 // import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-// import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
@@ -37,6 +37,9 @@ import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
 import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+
+
 
 import SimpleBBCodeDataProcessor from './simplebbcodedataprocessor';
 // Simple plugin which loads the data processor.
@@ -53,7 +56,10 @@ export default class ClassicEditor extends ClassicEditorBase {}
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
 	BBCode,
+
 	Essentials,
+	Autoformat,
+
 	Bold,
 	Italic,
 	Underline,
@@ -61,12 +67,16 @@ ClassicEditor.builtinPlugins = [
 	Superscript,
 	Subscript,
 	BlockQuote,
-	CKFinder,
 	Heading,
 	Link,
-	MediaEmbed,
 	Paragraph,
-	Alignment
+
+	Alignment,
+	Font,
+
+	MediaEmbed,
+
+	CKFinder,
 ];
 
 // Editor configuration.
@@ -75,7 +85,7 @@ ClassicEditor.defaultConfig = {
 		items: [
 			'heading',
 			'|', 'bold', 'italic', 'underline', 'strikethrough',
-			'|', 'alignment',
+			'|', 'fontColor', 'alignment',
 			'|', 'subscript', 'superscript', 'blockQuote',
 			'|', 'link',
 			'|', 'undo', 'redo'
