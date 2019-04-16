@@ -50,7 +50,7 @@ export default class SimpleBBCodeDataProcessor {
 		return bbob( customPreset() ).process( input, { render } ).html;
 	}
 
-	/// https://gist.github.com/soyuka/6183947
+	// / https://gist.github.com/soyuka/6183947
 	// Adapted from http://skeena.net/htmltobb/
 
 	_HTMLToBBCode( html ) {
@@ -125,8 +125,11 @@ export default class SimpleBBCodeDataProcessor {
 		html = html.replace( /<div class=["'](.*?)bbcode_quote["'](.*?)>(<span (.*?)class=["'](.*?)bbcode_quote_name["'](.*?)>(.*?)<\/span>)?(.*?)<\/div>/gi, '[quote name=$7]$8[/quote]' );
 		html = html.replace( /<div class=["'](.*?)bbcode_quote["'](.*?)>(.*?)<\/div>/gi, '[quote]$3[/quote]' );
 
-		html = html.replace( /<div>/gi, '\n' );
-		html = html.replace( /<\/div>/gi, '\n' );
+		html = html.replace( /<figure(.*?)>/gi, '' );
+		html = html.replace( /<\/figure>/gi, '' );
+		html = html.replace( /<div class=["'](.*?)ck-media__wrapper["'] data-oembed-url=["'](.*?)["'"]>(.*?)<div(.*?)>(.*?)<\/div>(.*?)<\/div>/gi, '[yt]$2[/yt]' );
+		html = html.replace( /<div class=["'](.*?)ck-media__wrapper["'] data-oembed-url=["'](.*?)["'"]>(.*?)<\/div>/gi, '[yt]$2[/yt]' );
+
 		html = html.replace( /<p(.*?)>(.*?)<\/p>/gmi, '$2\n\n' );
 
 		html = html.replace( /<td(.*?)>/gi, ' ' );
@@ -149,13 +152,21 @@ export default class SimpleBBCodeDataProcessor {
 		html = html.replace( /\r\r/gi, '' );
 		html = html.replace( /\[img]\//gi, '[img]' );
 		html = html.replace( /\[url=\//gi, '[url=' );
-		html = html.replace( /\[yt=\//gi, '[yt=' );
 
-		html = html.replace( /\[spoiler]\//gi, '[spoiler]' );
-		html = html.replace( /<\/spoiler>/gi, '[/spoiler]' );
+
+		html = html.replace( /\[spoiler\]/gi, '[spoiler]' );
+		html = html.replace( /\[\/spoiler\]/gi, '[/spoiler]' );
+		html = html.replace( /\[yt\]/gi, '[yt]' );
+		html = html.replace( /\[\/yt\]/gi, '[/yt]' );
+
 
 		html = html.replace( /<p(.*?)>(.*?)<\/p>/gmi, '$2\n\n' );
 		html = html.replace( /&nbsp;/gi, ' ' );
+
+
+		html = html.replace( /<div>/gi, '\n' );
+		html = html.replace( /<div(.*)>/gi, '\n' );
+		html = html.replace( /<\/div>/gi, '\n' );
 
 		html = html.replace( /(\S)\n/gi, '$1 ' );
 
